@@ -13,7 +13,7 @@ class BaseModel:
     Defines common attributes and methods for AirBnB_clone classes
     """
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """
         Initializes instance attributes
         """
