@@ -23,8 +23,8 @@ class FileStorage():
     def new(self, obj):
         """ adds to __objects the object with key as object class name.id"""
         self.reload()
-        key = object.__class__.__name__ + "." + object.id
-        FileStorage.__objects[key] = object.to_dict()
+        key = obj.__class__.__name__ + "." + obj.id
+        FileStorage.__obj[key] = obj.to_dict()
 
     def save(self):
         """ save __objects dict to json file """
@@ -38,5 +38,5 @@ class FileStorage():
             with open(FileStorage.__file_path, mode="r",
                       encoding="utf-8") as file:
                 FileStorage.__objects = json.load(file)
-            except IOError:
-                pass
+        except IOError:
+            pass
