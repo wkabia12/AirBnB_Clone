@@ -6,6 +6,7 @@
 
 import uuid
 from datetime import datetime
+from models.engine import file_storage as storage
 
 
 class BaseModel:
@@ -18,7 +19,6 @@ class BaseModel:
         Initializes instance attributes
         """
         if not kwargs:
-            from models import storage
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = self.created_at
