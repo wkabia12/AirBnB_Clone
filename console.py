@@ -16,7 +16,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_quit(self, arg):
         """ Quit cmd to exit program """
-        raise SystemExit
+        return True
 
     def do_EOF(self, arg):
         """ end of file """
@@ -52,7 +52,7 @@ class HBNBCommand(cmd.Cmd):
         elif len(arg_list) == 1:
             print("** instance id missing **")
         else:
-            dicts = model.storage.all()
+            dicts = storage.all()
             instance = arg_list[0] + '.' + arg_list[1]
             if instance in dicts.keys():
                 print(dicts[instance])
@@ -72,10 +72,10 @@ class HBNBCommand(cmd.Cmd):
         elif len(arg_list) == 1:
             print("** instance id missing **")
         else:
-            dicts = model.storage.all()
+            objs = storage.all()
             instance = arg_list[0] + '.' + arg_list[1]
-            if instance in dicts.keys():
-                del(objects[instance])
+            if instance in objs.keys():
+                del objs[instance]
                 storage.save()
             else:
                 print("** no instance found **")

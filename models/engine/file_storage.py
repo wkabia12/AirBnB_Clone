@@ -24,7 +24,7 @@ class FileStorage():
         """ adds to __objects the object with key as object class name.id"""
         self.reload()
         key = obj.__class__.__name__ + "." + obj.id
-        FileStorage.__obj[key] = obj.to_dict()
+        FileStorage.__objects[key] = obj.to_dict()
 
     def save(self):
         """ save __objects dict to json file """

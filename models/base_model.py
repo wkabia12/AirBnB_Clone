@@ -6,7 +6,7 @@
 
 import uuid
 from datetime import datetime
-from models.engine.file_storage import FileStorage as storage
+from models.engine.file_storage import FileStorage
 
 
 class BaseModel:
@@ -22,7 +22,7 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = self.created_at
-            storage.new(self)
+            FileStorage().new(self)
         else:
             kwargs['created_at'] = datetime.strptime(kwargs['created_at'],
                                                      '%Y-%m-%dT%H:%M:%S.%f')
@@ -43,7 +43,7 @@ class BaseModel:
         Updates the public instance attribute - updated_at
         """
         self.updated_at = datetime.now()
-        storage.save()
+        FileStorage().save()
 
     def to_dict(self):
         """
