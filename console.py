@@ -7,6 +7,11 @@ import cmd
 import json
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
+from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
 
 
 class HBNBCommand(cmd.Cmd):
@@ -29,7 +34,7 @@ class HBNBCommand(cmd.Cmd):
     def do_create(self, line):
         """ creates new instance of Basemodel """
         arg_list = line.split()
-        classes = ["BaseModel"]
+        classes = ["BaseModel", "User", "State", "City", "Amenity", "Review"]
 
         if not arg_list:
             print("** class name missing **")
@@ -45,7 +50,7 @@ class HBNBCommand(cmd.Cmd):
         """ prints string rep of an instance """
         storage = FileStorage()
         arg_list = line.split()
-        classes = ["BaseModel"]
+        classes = ["BaseModel", "User", "State", "City", "Amenity", "Review"]
 
         storage.reload()
 
@@ -67,7 +72,7 @@ class HBNBCommand(cmd.Cmd):
         """ deletes an an instance and save changes to json file """
         storage = FileStorage()
         arg_list = line.split()
-        classes = ["BaseModel"]
+        classes = ["BaseModel", "User", "State", "City", "Amenity", "Review"]
 
         if not arg_list:
             print("** class name missing **")
@@ -88,7 +93,7 @@ class HBNBCommand(cmd.Cmd):
         """ prints string instance of all instances """
         storage = FileStorage()
         arg_list = line.split()
-        classes = ["BaseModel"]
+        classes = ["BaseModel", "User", "State", "City", "Amenity", "Review"]
 
         if not arg_list or arg_list[0] not in classes:
             str_list = []
@@ -103,7 +108,7 @@ class HBNBCommand(cmd.Cmd):
         """ updates an an instance and save changes to json file """
         storage = FileStorage()
         arg_list = line.split()
-        classes = ["BaseModel"]
+        classes = ["BaseModel", "User", "State", "City", "Amenity", "Review"]
 
         if not arg_list:
             print("** class name missing **")
