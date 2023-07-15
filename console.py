@@ -22,6 +22,10 @@ class HBNBCommand(cmd.Cmd):
         """ end of file """
         return True
 
+    def emptyline(self):
+        """ emptyline """
+        pass
+
     def do_create(self, line):
         """ creates new instance of Basemodel """
         arg_list = line.split()
@@ -76,6 +80,52 @@ class HBNBCommand(cmd.Cmd):
             instance = arg_list[0] + '.' + arg_list[1]
             if instance in objs.keys():
                 del objs[instance]
+                storage.save()
+            else:
+                print("** no instance found **")
+
+    def do_all(self, line):
+        """ prints string instance of all instances """
+        storage = FileStorage()
+        arg_list = line.split()
+        classes = ["BaseModel"]
+
+        if not arg_list or arg_list[0] not in classes:
+            str_list = []
+            objs = storage.all()
+            for instance in objs.values():
+                str_list.append(instance.__str__())
+            print(str_list)
+        else:
+            print("** class doesn't exist **")
+
+    def do_update(self, line):
+        """ updates an an instance and save changes to json file """
+        storage = FileStorage()
+        arg_list = line.split()
+        classes = ["BaseModel"]
+
+        if not arg_list:
+            print("** class name missing **")
+        elif arg_list[0] not in classes:
+            print("** class doesn't exist **")
+        elif len(arg_list) == 1:
+            print("** instance id missing **")
+        elif len(arg_list) == 2:
+            print("** attribute id missing **")
+        elif len(arg_list) == 3:
+            print("** value missing **")
+        else:
+            objs = storage.all()
+            instance = arg_list[0] + '.' + arg_list[1]
+            if instance in objs.keys():
+                for value in objs.values():
+                    try:
+                        attr_type = type(getattr(value, arg_list[2]))
+                        arg_list[3] = attr_type(arg_list[3])
+                    except AttributeError:
+                        pass
+                setattr(value, arg_list[2], arg_list[3])
                 storage.save()
             else:
                 print("** no instance found **")

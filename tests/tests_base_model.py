@@ -2,7 +2,7 @@
 
 
 """
-Tests for the Base Model 
+Tests for the Base Model
 """
 
 import unittest
